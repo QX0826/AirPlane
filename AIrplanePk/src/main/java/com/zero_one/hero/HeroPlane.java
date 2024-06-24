@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 public class HeroPlane {
     //飞机的速度
-    public double speed = 5;
+    public static double speed = 5;
 
     //飞机图片
     private Image image;
@@ -88,16 +88,12 @@ public class HeroPlane {
         TranslateTransition translateTransitiondown = new TranslateTransition(Duration.seconds(2), imageView);
         translateTransitiondown.setFromY(0);
         translateTransitiondown.setToY(scene.getHeight() / 2 - imageView.getFitHeight() / 2 - 10);
-        translateTransitionin.setInterpolator(Interpolator.EASE_IN);
+        translateTransitiondown.setInterpolator(Interpolator.EASE_IN);
 
 
         //创建顺序动画
         SequentialTransition sequentialTransition = new SequentialTransition(translateTransitionin, translateTransitiondown);
-        sequentialTransition.setOnFinished(event -> {
 
-        });
-
-        sequentialTransition.play();
         sequentialTransition.setOnFinished(event -> {
             //初始化键盘控制
             heroControl.initKeyControl();
@@ -106,7 +102,7 @@ public class HeroPlane {
             
             callback.onCallbak();
         });
-
+        sequentialTransition.play();
     }
 
 

@@ -30,7 +30,7 @@ public class HeroControl {
     //绑定页面
     private Scene scene;
     //键盘按键事件
-    private EventHandler<KeyEvent> keypressed = new EventHandler<KeyEvent>() {
+    private final EventHandler<KeyEvent> keypressed = new EventHandler<KeyEvent>() {
         public void handle(KeyEvent event) {
             //获取键码
             KeyCode keycode = event.getCode();
@@ -47,10 +47,6 @@ public class HeroControl {
 
             } else if (keycode == KeyCode.RIGHT) {
                 heroPlane.getImageView().setUserData(KeyCode.RIGHT);
-
-            } else if (keycode == KeyCode.LEFT) {
-
-            } else if (keycode == KeyCode.RIGHT) {
 
             }
         }
@@ -94,7 +90,7 @@ public class HeroControl {
     public Timeline createAnimation() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
             //获取用户数据
-            heroPlane.getImageView().getUserData();
+            //heroPlane.getImageView().getUserData();
 
             KeyCode keycode = (KeyCode) heroPlane.getImageView().getUserData();
             if (keycode != null) {
@@ -105,16 +101,16 @@ public class HeroControl {
                 //判断按键
                 switch (keycode) {
                     case UP:
-                        newY -= heroPlane.speed;
+                        newY -= HeroPlane.speed;
                         break;
                     case DOWN:
-                        newY += heroPlane.speed;
+                        newY += HeroPlane.speed;
                         break;
                     case LEFT:
-                        newX -= heroPlane.speed;
+                        newX -= HeroPlane.speed;
                         break;
                     case RIGHT:
-                        newX += heroPlane.speed;
+                        newX += HeroPlane.speed;
                         break;
 
                     default:
@@ -129,10 +125,10 @@ public class HeroControl {
                 Double miny = -heroPlane.getScene().getHeight() / 2 + height / 2;
                 Double maxy = heroPlane.getScene().getHeight() / 2 - height / 2;
                 //判断飞机在范围
-                if (newX > minx && newX < maxx) {
+                if (newX >= minx && newX <= maxx) {
                     heroPlane.getImageView().setTranslateX(newX);
                 }
-                if (newY > miny && newY < maxy) {
+                if (newY >= miny && newY <= maxy) {
                     heroPlane.getImageView().setTranslateX(newY);
                 }
 
