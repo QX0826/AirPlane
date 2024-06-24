@@ -102,7 +102,7 @@ public class HeroPlane {
             //初始化键盘控制
             heroControl.initKeyControl();
             //创建飞机移动动画
-            heroControl.createAnimation();
+            heroControl.createAnimation().play();
             
             callback.onCallbak();
         });
