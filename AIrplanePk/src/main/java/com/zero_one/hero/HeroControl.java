@@ -129,7 +129,7 @@ public class HeroControl {
                     heroPlane.getImageView().setTranslateX(newX);
                 }
                 if (newY >= miny && newY <= maxy) {
-                    heroPlane.getImageView().setTranslateX(newY);
+                    heroPlane.getImageView().setTranslateY(newY);
                 }
 
             }

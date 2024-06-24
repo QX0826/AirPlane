@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -19,6 +21,8 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
+@Getter
+@Setter
 
 public class HeroPlane {
     //飞机的速度
@@ -87,7 +91,7 @@ public class HeroPlane {
         //飞下画面
         TranslateTransition translateTransitiondown = new TranslateTransition(Duration.seconds(2), imageView);
         translateTransitiondown.setFromY(0);
-        translateTransitiondown.setToY(scene.getHeight() / 2 - imageView.getFitHeight() / 2 - 10);
+        translateTransitiondown.setToY(scene.getHeight() / 2 - image.getHeight() / 2 - 20);
         translateTransitiondown.setInterpolator(Interpolator.EASE_IN);
 
 
