@@ -66,7 +66,7 @@ public class HeroControl {
         //绑定按键事件
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keypressed);
         //绑定松开按键事件
-        scene.setOnKeyPressed(event -> {
+        scene.setOnKeyReleased(event -> {
             KeyCode keycode = event.getCode();
             if (keycode == KeyCode.UP && heroPlane.getImageView().getUserData() == KeyCode.UP) {
                 //变为空
@@ -129,7 +129,7 @@ public class HeroControl {
                     heroPlane.getImageView().setTranslateX(newX);
                 }
                 if (newY >= miny && newY <= maxy) {
-                    heroPlane.getImageView().setTranslateX(newY);
+                    heroPlane.getImageView().setTranslateY(newY);
                 }
 
             }
