@@ -29,6 +29,11 @@ public class HeroControl {
 
     //绑定页面
     private Scene scene;
+
+    //标识空格是否被按下
+    private boolean SpacePressed = false;
+
+
     //键盘按键事件
     private final EventHandler<KeyEvent> keypressed = new EventHandler<KeyEvent>() {
         public void handle(KeyEvent event) {
@@ -49,6 +54,15 @@ public class HeroControl {
                 heroPlane.getImageView().setUserData(KeyCode.RIGHT);
 
             }
+            if (keycode == KeyCode.SPACE) {
+                //设置空格键按下
+                SpacePressed = true;
+
+                //发射子弹
+                heroPlane.fireBullet();
+
+            }
+
         }
 
     };
@@ -77,7 +91,12 @@ public class HeroControl {
                 heroPlane.getImageView().setUserData(null);
             } else if (keycode == KeyCode.RIGHT && heroPlane.getImageView().getUserData() == KeyCode.RIGHT) {
                 heroPlane.getImageView().setUserData(null);
+            }//按空格键发射子弹
+            else if (keycode == KeyCode.SPACE) {
+                //判断是否按下
+                SpacePressed= false;
             }
+
         });
 
     }
@@ -140,6 +159,15 @@ public class HeroControl {
         //返回动画
         return timeline;
     }
+
+    /**
+     * 移除键盘监听
+     */
+    public void removeKeyControl() {
+        scene.removeEventHandler(KeyEvent.KEY_PRESSED, keypressed);
+    }
+
+
 }
 
 

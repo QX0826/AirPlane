@@ -5,11 +5,15 @@ import com.zero_one.Player.MP3Player;
 import com.zero_one.Scene.ReLoopImageView;
 import com.zero_one.config.Appconfig;
 import com.zero_one.hero.HeroPlane;
+import com.zero_one.record.GameScore;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,8 +24,8 @@ import lombok.extern.slf4j.Slf4j;
  * @Date: 2024-06-23 15:08
  */
 
- @Slf4j
- @Setter
+@Slf4j
+@Setter
 
 public class GameLevel1 {
 
@@ -31,15 +35,15 @@ public class GameLevel1 {
 
     private StackPane root;//布局(根节点)
 
-    private String label;//标签
+    private Label label;//标签
 
     private MP3Player player;//音频播放器
 
     private ReLoopImageView level1Map;//地图
 
-    private HeroPlane  heroPlane;    //飞机
+    private HeroPlane heroPlane;    //飞机
 
-    public GameLevel1(Stage primaryStage){
+    public GameLevel1(Stage primaryStage) {
         this.primarystage = primaryStage;
         initRoot();//初始化布局
         initScene();//初始化场景
@@ -56,7 +60,7 @@ public class GameLevel1 {
         root = new StackPane();
 
         // 初始化根节点的宽高
-        root.setPrefSize(primarystage.getWidth(),primarystage.getHeight());
+        root.setPrefSize(primarystage.getWidth(), primarystage.getHeight());
     }
 
 
@@ -98,9 +102,10 @@ public class GameLevel1 {
         //初始化飞机
         initHeroPlane();
 
+        //初始化计分板
+        initScoreBoard();
+
     }
-
-
 
 
     private void initBackground() {
@@ -131,7 +136,7 @@ public class GameLevel1 {
 
     private void initHeroPlane() {
 
-        heroPlane = new HeroPlane(root, scene, level1Map.actualWidth, ()->{
+        heroPlane = new HeroPlane(root, scene, level1Map.actualWidth, () -> {
 
 
         });
@@ -140,6 +145,21 @@ public class GameLevel1 {
 
     }
 
+    private void initScoreBoard() {
+        Label label = new Label(String.valueOf(GameScore.score));
+        label.setFont(Font.font("楷体", FontWeight.BOLD,20));
+        label.setTextFill(Color.YELLOW);
 
+
+       //设置位置在地图左上角
+        label.setTranslateX(-level1Map.actualWidth/2+30);
+        label.setTranslateY(-scene.getHeight()/2+30);
+
+
+        //添加到根节点
+        root.getChildren().add(label);
+
+
+    }
 
 }

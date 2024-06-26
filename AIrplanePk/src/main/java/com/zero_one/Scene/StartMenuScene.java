@@ -6,6 +6,7 @@ import com.zero_one.Player.MP3Player;
 import com.zero_one.assembly.ReVideoView;
 import com.zero_one.config.Appconfig;
 
+import com.zero_one.record.GameScore;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -148,7 +149,8 @@ public class StartMenuScene {
             player.stop();
             //进入第一关游戏视频
             new ReVideoView(primaryStage,Assets.VIDEOS.get("movie_story_1"),()->{
-
+                //初始化分数
+                GameScore.score = 0;
                 //跳转到游戏场景
                 new GameLevel1(primaryStage);
 

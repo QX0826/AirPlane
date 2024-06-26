@@ -1,6 +1,7 @@
 package com.zero_one.hero;
 
 import com.zero_one.Load.Assets;
+import com.zero_one.Player.MP3Player;
 import com.zero_one.common.CustomEvent;
 import javafx.animation.Interpolator;
 import javafx.animation.SequentialTransition;
@@ -48,6 +49,7 @@ public class HeroPlane {
     //玩家飞机监听
     private HeroControl heroControl;
 
+
     /**
      * 构造函数
      *
@@ -75,6 +77,7 @@ public class HeroPlane {
 
     public void in() {
         //音频
+        MP3Player.playOnce(Assets.AUDIOS.get("effect_plane_flying_overhead"));
 
         //设置初始飞机的位置
         imageView.setTranslateY(scene.getHeight());
@@ -87,6 +90,9 @@ public class HeroPlane {
         translateTransitionin.setFromY(scene.getHeight());
         translateTransitionin.setToY(0);
         translateTransitionin.setInterpolator(Interpolator.EASE_OUT);//减速
+
+
+
 
         //飞下画面
         TranslateTransition translateTransitiondown = new TranslateTransition(Duration.seconds(2), imageView);
@@ -107,6 +113,32 @@ public class HeroPlane {
             callback.onCallbak();
         });
         sequentialTransition.play();
+    }
+
+    /**
+     * 飞出动画
+     * @return
+     */
+
+    public void out(CustomEvent callback) {
+        //移除键盘控制
+        heroControl.removeKeyControl();
+        //飞机飞出动画
+        double translateY = imageView.getTranslateY();
+        //创建平移动画类
+        TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), imageView);
+        translateTransition.setFromY(translateY);
+        translateTransition.setToY(-scene.getHeight()-100);
+        //逐渐加速
+        translateTransition.setInterpolator(Interpolator.EASE_IN);
+        translateTransition.setOnFinished(event -> {
+            //移除飞机
+            container.getChildren().remove(imageView);
+            callback.onCallbak();
+        });
+        //播放
+        translateTransition.play();
+
     }
 
 
@@ -160,5 +192,12 @@ public class HeroPlane {
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
+    }
+
+    /**
+     * 发射子弹
+     */
+    public void fireBullet() {
+
     }
 }
