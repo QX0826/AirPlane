@@ -28,27 +28,20 @@ import lombok.extern.slf4j.Slf4j;
 public class HeroPlane {
     //飞机的速度
     public static double speed = 5;
-
     //飞机图片
     private Image image;
-
     //飞机的试图
     private ImageView imageView;
     //飞机的容器
     private Pane container;
-
     //飞机的场景
     private Scene scene;
-
     //飞机的能移动的最大宽度
     private double maxWidth;
-
     //回调事件
     private CustomEvent callback;
-
     //玩家飞机监听
     private HeroControl heroControl;
-
 
     /**
      * 构造函数
@@ -66,50 +59,36 @@ public class HeroPlane {
         this.scene = scene;
         this.maxWidth = maxWidth;
         this.callback = callback;
-        this.heroControl = new HeroControl(this,scene);
-
+        this.heroControl = new HeroControl(this, scene);
     }
-
 
     /**
      * 玩家飞机飞入动画
      */
-
     public void in() {
         //音频
         MP3Player.playOnce(Assets.AUDIOS.get("effect_plane_flying_overhead"));
-
         //设置初始飞机的位置
         imageView.setTranslateY(scene.getHeight());
-
         //把飞机放入容器
         container.getChildren().add(imageView);
-
         //飞机飞入动画
         TranslateTransition translateTransitionin = new TranslateTransition(Duration.seconds(2), imageView);
         translateTransitionin.setFromY(scene.getHeight());
         translateTransitionin.setToY(0);
         translateTransitionin.setInterpolator(Interpolator.EASE_OUT);//减速
-
-
-
-
         //飞下画面
         TranslateTransition translateTransitiondown = new TranslateTransition(Duration.seconds(2), imageView);
         translateTransitiondown.setFromY(0);
         translateTransitiondown.setToY(scene.getHeight() / 2 - image.getHeight() / 2 - 20);
         translateTransitiondown.setInterpolator(Interpolator.EASE_IN);
-
-
         //创建顺序动画
         SequentialTransition sequentialTransition = new SequentialTransition(translateTransitionin, translateTransitiondown);
-
         sequentialTransition.setOnFinished(event -> {
             //初始化键盘控制
             heroControl.initKeyControl();
             //创建飞机移动动画
             heroControl.createAnimation().play();
-            
             callback.onCallbak();
         });
         sequentialTransition.play();
@@ -117,9 +96,9 @@ public class HeroPlane {
 
     /**
      * 飞出动画
+     *
      * @return
      */
-
     public void out(CustomEvent callback) {
         //移除键盘控制
         heroControl.removeKeyControl();
@@ -128,7 +107,7 @@ public class HeroPlane {
         //创建平移动画类
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), imageView);
         translateTransition.setFromY(translateY);
-        translateTransition.setToY(-scene.getHeight()-100);
+        translateTransition.setToY(-scene.getHeight() - 100);
         //逐渐加速
         translateTransition.setInterpolator(Interpolator.EASE_IN);
         translateTransition.setOnFinished(event -> {
@@ -138,9 +117,14 @@ public class HeroPlane {
         });
         //播放
         translateTransition.play();
-
     }
 
+    /**
+     * 发射子弹
+     */
+    public void fireBullet() {
+        HeroBullet.fireBullet(container, imageView);
+    }
 
     public double getSpeed() {
         return speed;
@@ -192,12 +176,5 @@ public class HeroPlane {
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
-    }
-
-    /**
-     * 发射子弹
-     */
-    public void fireBullet() {
-
     }
 }

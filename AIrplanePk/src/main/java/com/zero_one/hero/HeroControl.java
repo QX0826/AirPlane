@@ -11,7 +11,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-
 /**
  * @Description: 键盘控制类
  * @Author: QX
@@ -23,17 +22,12 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 
 public class HeroControl {
-
     //玩家飞机
     private HeroPlane heroPlane;
-
     //绑定页面
     private Scene scene;
-
     //标识空格是否被按下
     private boolean SpacePressed = false;
-
-
     //键盘按键事件
     private final EventHandler<KeyEvent> keypressed = new EventHandler<KeyEvent>() {
         public void handle(KeyEvent event) {
@@ -43,30 +37,21 @@ public class HeroControl {
             if (keycode == KeyCode.UP) {
                 //设置飞机用户数据
                 heroPlane.getImageView().setUserData(KeyCode.UP);
-
             } else if (keycode == KeyCode.DOWN) {
                 heroPlane.getImageView().setUserData(KeyCode.DOWN);
-
             } else if (keycode == KeyCode.LEFT) {
                 heroPlane.getImageView().setUserData(KeyCode.LEFT);
-
             } else if (keycode == KeyCode.RIGHT) {
                 heroPlane.getImageView().setUserData(KeyCode.RIGHT);
-
             }
             if (keycode == KeyCode.SPACE) {
                 //设置空格键按下
                 SpacePressed = true;
-
                 //发射子弹
                 heroPlane.fireBullet();
-
             }
-
         }
-
     };
-
 
     public HeroControl(HeroPlane heroPlane, Scene scene) {
         this.heroPlane = heroPlane;
@@ -94,29 +79,21 @@ public class HeroControl {
             }//按空格键发射子弹
             else if (keycode == KeyCode.SPACE) {
                 //判断是否按下
-                SpacePressed= false;
+                SpacePressed = false;
             }
-
         });
-
     }
 
     /**
      * 创建飞机移动动画
-     *
-     * @return
      */
     public Timeline createAnimation() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(10), event -> {
-            //获取用户数据
-            //heroPlane.getImageView().getUserData();
-
             KeyCode keycode = (KeyCode) heroPlane.getImageView().getUserData();
             if (keycode != null) {
                 //获取位置
                 Double newX = heroPlane.getImageView().getTranslateX();
                 Double newY = heroPlane.getImageView().getTranslateY();
-
                 //判断按键
                 switch (keycode) {
                     case UP:
@@ -131,7 +108,6 @@ public class HeroControl {
                     case RIGHT:
                         newX += HeroPlane.speed;
                         break;
-
                     default:
                         break;
                 }
@@ -155,7 +131,6 @@ public class HeroControl {
         }));
         //设置动画执行
         timeline.setCycleCount(Timeline.INDEFINITE);
-
         //返回动画
         return timeline;
     }
@@ -166,8 +141,6 @@ public class HeroControl {
     public void removeKeyControl() {
         scene.removeEventHandler(KeyEvent.KEY_PRESSED, keypressed);
     }
-
-
 }
 
 

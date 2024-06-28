@@ -35,6 +35,27 @@ public class MP3Player {
         this.executorService = Executors.newSingleThreadExecutor();
     }
 
+    /**
+     * 播放一次音频
+     *
+     * @auther: QX
+     * @date: 2024-06-26 10:26
+     */
+
+    public static void playOnce(String filePath) {
+        ExecutorService staticExecutorService = Executors.newSingleThreadExecutor();
+        staticExecutorService.submit(() -> {
+            try {
+                //创建字节输入流
+                FileInputStream fis = new FileInputStream(filePath);
+                //创建播放器
+                AdvancedPlayer advancedPlayer = new AdvancedPlayer(fis);
+                advancedPlayer.play();
+            } catch (JavaLayerException | IOException e) {
+            }
+        });
+    }
+
     public void play() {
         if (isPaused) {
             resume();
@@ -101,29 +122,5 @@ public class MP3Player {
     public boolean isPlaying() {
         return future != null && !future.isDone();
     }
-
-    /**
-     * 播放一次音频
-     * @auther: QX
-     * @date:   2024-06-26 10:26
-     */
-
-    public static void playOnce(String filePath) {
-       ExecutorService staticExecutorService = Executors.newSingleThreadExecutor();
-       staticExecutorService.submit(() -> {
-           try {
-               //创建字节输入流
-               FileInputStream fis = new FileInputStream(filePath);
-
-               //创建播放器
-               AdvancedPlayer advancedPlayer = new AdvancedPlayer(fis);
-
-               advancedPlayer.play();
-           } catch (JavaLayerException | IOException e) {
-
-           }
-       });
-    }
-
 }
 

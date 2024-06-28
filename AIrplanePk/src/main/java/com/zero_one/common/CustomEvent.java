@@ -6,16 +6,6 @@ package com.zero_one.common;
  * @Date: 2024-06-23 9:49
  */
 
-
-
 public interface CustomEvent {
-
     void onCallbak();
-
-
-
-
-
-
-
 }
