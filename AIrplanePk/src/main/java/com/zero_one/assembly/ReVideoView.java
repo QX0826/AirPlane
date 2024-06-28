@@ -89,8 +89,10 @@ public class ReVideoView {
      * 初始化媒体播放器
      */
     private void initMediaPlayer() {
+
         //获取路径
         Path path = Paths.get(filePath);
+
         //创建媒体
         Media media = null;
 
@@ -143,13 +145,13 @@ public class ReVideoView {
         //设置事件监听 esc键退出
         scene.setOnKeyPressed(event -> {
             log.info("按键按下");
-               if (event.getCode() == KeyCode.ESCAPE) {
-                   if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING ||
-                           mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
-                       //跳转到视频结尾
-                       mediaPlayer.seek(mediaPlayer.getTotalDuration());
-                   }
-               }
+            if (event.getCode() == KeyCode.ESCAPE) {
+                if (mediaPlayer.getStatus() == MediaPlayer.Status.PLAYING ||
+                        mediaPlayer.getStatus() == MediaPlayer.Status.PAUSED) {
+                    //跳转到视频结尾
+                    mediaPlayer.seek(mediaPlayer.getTotalDuration());
+                }
+            }
 
         });
     }

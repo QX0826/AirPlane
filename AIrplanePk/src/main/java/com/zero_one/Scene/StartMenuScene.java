@@ -44,7 +44,7 @@ public class StartMenuScene {
 
     private String label;//标签
 
-    private MP3Player player;//音频播放器
+    public static MP3Player player;//音频播放器
     public StartMenuScene(Stage primaryStage) {
 
         this.primaryStage = primaryStage;
@@ -56,6 +56,7 @@ public class StartMenuScene {
         showScene();//显示场景
 
     }
+
 
     /**
      * 初始化布局
@@ -108,6 +109,9 @@ public class StartMenuScene {
 
         player.play();
         player.setLoop(true);
+        if(SettingsScene.cb1!=null&&!SettingsScene.cb1.isSelected()){
+            player.stop();
+        }
 
     }
 
@@ -144,6 +148,13 @@ public class StartMenuScene {
         vBox.setPadding(new Insets(100));
 
         //创建按钮
+        vBox.getChildren().add(createButton("选择飞机", event -> {
+            player.stop();
+            //跳转到选择飞机场景
+           SettingsScene.start(primaryStage);
+
+
+        }));
 
         vBox.getChildren().add(createButton("拯救地球", event -> {
             player.stop();
@@ -153,7 +164,6 @@ public class StartMenuScene {
                 GameScore.score = 0;
                 //跳转到游戏场景
                 new GameLevel1(primaryStage);
-
             });
 
         }));

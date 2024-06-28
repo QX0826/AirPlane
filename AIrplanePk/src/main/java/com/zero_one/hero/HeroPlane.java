@@ -2,6 +2,8 @@ package com.zero_one.hero;
 
 import com.zero_one.Load.Assets;
 import com.zero_one.Player.MP3Player;
+
+import com.zero_one.Scene.SettingsScene;
 import com.zero_one.common.CustomEvent;
 import javafx.animation.Interpolator;
 import javafx.animation.SequentialTransition;
@@ -53,7 +55,7 @@ public class HeroPlane {
      */
 
     public HeroPlane(Pane container, Scene scene, double maxWidth, CustomEvent callback) {
-        this.image = new Image(Assets.IMAGES.get("plane_hero_1"));
+        this.image = new Image(Assets.IMAGES.get("plane_hero_"+ SettingsScene.planeID));
         this.imageView = new ImageView(image);
         this.container = container;
         this.scene = scene;

@@ -121,7 +121,6 @@ public class Assets {
      * 加载资源路径
      */
     public static String loadClassPath() {
-        System.out.println(Assets.class.getClassLoader().getResource("").getPath());
         return Objects.requireNonNull(Assets.class.getClassLoader().getResource("").getPath());
     }
 }

@@ -21,6 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 
 public class EnemyExplosion {
+     public static MP3Player player;//音频播放器
 
      public static void explode(Pane container, ImageView enemy, CustomEvent callback){
          //回调
