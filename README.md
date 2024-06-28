@@ -1,2 +1,2 @@
-# Javase-
-JavaFX PlanePK
+# Javase-JavaFX
+ PlanePK
