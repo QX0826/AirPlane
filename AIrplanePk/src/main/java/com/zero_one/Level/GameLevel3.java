@@ -113,7 +113,7 @@ public class GameLevel3 {
             GameScore.addScore();
             label.setText(String.valueOf(GameScore.score));
 
-            if (GameScore.score >= 10) {
+            if (GameScore.score >= 15) {
 
                 heroPlane.out((() -> {
                     player.stop();

@@ -113,7 +113,7 @@ public class GameLevel2 {
             GameScore.addScore();
             label.setText(String.valueOf(GameScore.score));
             //判断是否进入第二关
-            if (GameScore.score >= 5) {
+            if (GameScore.score >= 10) {
                 //进入第二关
                 heroPlane.out((() -> {
                     player.stop();
